@@ -17,7 +17,7 @@ const Userlogin = async (req, res, next) => {
         if (!isPasswordMatch) {
             return res.status(401).json({ message: 'Invalid Password!' })
         }
-        const token = generateToken({ id: userInfo._id, username: userInfo.username })
+        const token = generateToken({ id: userInfo._id, username: userInfo.username, isAdmin: userInfo.isAdmin })
         res.status(200).json({ message: 'Login successfully!', Token: token })
     } catch (error) {
         const status = 400
@@ -36,7 +36,7 @@ const UserSignup = async (req, res, next) => {
         }
         const newUser = new User(UserInfo)
         const response = await newUser.save()
-        const token = generateToken({ id: response._id, username: response.username })
+        const token = generateToken({ id: response._id, username: response.username, isAdmin: response.isAdmin })
         res.status(200).json({ message: 'SignUp Successfully!', Token: token })
     } catch (error) {
         const status = 400

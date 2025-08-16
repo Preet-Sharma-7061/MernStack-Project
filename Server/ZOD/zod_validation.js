@@ -28,7 +28,8 @@ const Uservalidation = z.object({
         .regex(
             /[!@#$%^&*(),.?":{}|<>]/,
             "Password must contain at least one special character"
-        )
+        ),
+    isAdmin: z.boolean().optional().default(false)
 });
 
 const loginvalidation = z.object({
